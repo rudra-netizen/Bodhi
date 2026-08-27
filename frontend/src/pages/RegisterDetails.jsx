@@ -53,7 +53,7 @@ function RegisterDetails() {
       setLoading(true);
 
       const apiBaseUrl =
-        import.meta.env.VITE_API_URL || "http://localhost:3000";
+        import.meta.env.VITE_API_URL || "https://bodhi-5wnm.onrender.com/";
 
       /*
         Google OAuth se email already backend/session

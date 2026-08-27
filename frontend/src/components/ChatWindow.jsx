@@ -21,7 +21,8 @@ import "../styles/chat.css";
 // SOCKET
 // =========================================================
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:3000";
+const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL || "https://bodhi-5wnm.onrender.com/";
 
 // =========================================================
 // MODES

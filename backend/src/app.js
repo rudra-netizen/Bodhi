@@ -10,6 +10,8 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+const path = require("path");
+
 // =========================================================
 // CORS
 // =========================================================
@@ -33,6 +35,7 @@ app.use(express.json({ limit: "10mb" }));
 // =========================================================
 
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
 // =========================================================
 // ROUTES
@@ -41,6 +44,10 @@ app.use(cookieParser());
 app.use("/api/auth", AuthRouter);
 
 app.use("/api/chat", ChatRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 module.exports = app;
 
