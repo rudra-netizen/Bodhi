@@ -6,8 +6,10 @@ function Register() {
   const navigate = useNavigate();
 
   const handleGoogleSignup = () => {
-    // Backend OAuth endpoint
-    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`;
+    const apiBase = (
+      import.meta.env.VITE_API_URL || "http://localhost:3000"
+    ).replace(/\/+$/, "");
+    window.location.href = `${apiBase}/api/auth/google`;
   };
 
   return (

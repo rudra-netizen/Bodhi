@@ -18,8 +18,11 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
-
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://bodhi-5wnm.onrender.com",
+    ],
     credentials: true,
   }),
 );
