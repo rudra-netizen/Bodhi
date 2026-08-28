@@ -310,13 +310,12 @@ function ChatWindow() {
   // REMOVE IMAGE
   // =======================================================
 
-  function removeSelectedImage() {
-    setSelectedImage(null);
-
-    if (imagePreview) {
+  function removeSelectedImage(revokeCurrent = true) {
+    if (revokeCurrent && imagePreview) {
       URL.revokeObjectURL(imagePreview);
     }
 
+    setSelectedImage(null);
     setImagePreview(null);
 
     if (fileInputRef.current) {
@@ -385,6 +384,7 @@ function ChatWindow() {
         setIsGenerating(true);
 
         const base64 = await fileToBase64(selectedImage);
+        const uploadedPreviewUrl = imagePreview;
 
         // ===============================================
         // SHOW USER MESSAGE
@@ -400,7 +400,7 @@ function ChatWindow() {
 
             type: "image",
 
-            content: imagePreview,
+            content: uploadedPreviewUrl,
 
             prompt: input.trim(),
           },
@@ -425,8 +425,12 @@ function ChatWindow() {
         });
 
         setInput("");
+        setSelectedImage(null);
+        setImagePreview(null);
 
-        removeSelectedImage();
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
       } catch (error) {
         console.error("Image send error:", error);
 
