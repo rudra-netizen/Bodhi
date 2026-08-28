@@ -84,6 +84,8 @@ function ChatWindow() {
 
   const messagesEndRef = useRef(null);
 
+  const sidebarRef = useRef(null);
+
   // =======================================================
   // SOCKET CONNECTION
   // =======================================================
@@ -177,6 +179,10 @@ function ChatWindow() {
         return;
       }
 
+      if (window.innerWidth <= 900) {
+        setSidebarOpen(false);
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat`, {
         method: "POST",
 
@@ -231,6 +237,10 @@ function ChatWindow() {
     setChatId(chat.id);
 
     setChatTitle(chat.title);
+
+    if (window.innerWidth <= 900) {
+      setSidebarOpen(false);
+    }
 
     try {
       const response = await fetch(
@@ -636,11 +646,21 @@ function ChatWindow() {
 
   return (
     <div className={`chat-app ${darkMode ? "dark" : "light"}`}>
+      {typeof window !== "undefined" && window.innerWidth <= 900 && (
+        <div
+          className={`sidebar-backdrop ${sidebarOpen ? "show" : ""}`}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* ================================================= */}
       {/* SIDEBAR */}
       {/* ================================================= */}
 
-      <aside className={`sidebar ${sidebarOpen ? "open" : "closed"}`}>
+      <aside
+        ref={sidebarRef}
+        className={`sidebar ${sidebarOpen ? "open" : "closed"}`}
+      >
         {/* BRAND */}
 
         <div className="brand">
