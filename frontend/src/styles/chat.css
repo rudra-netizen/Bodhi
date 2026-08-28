@@ -56,6 +56,8 @@ input {
   --purple-light: #ecebff;
   --message-user: #6159eb;
   --message-ai: #ffffff;
+  background: linear-gradient(180deg, #f4f7ff 0%, #edf3ff 100%);
+  color: var(--text);
 }
 
 .chat-app.dark {
@@ -70,6 +72,26 @@ input {
   --purple-light: rgba(109, 99, 255, 0.18);
   --message-user: #665df2;
   --message-ai: rgba(18, 26, 38, 0.92);
+  background: linear-gradient(180deg, #020b16 0%, #081421 100%);
+  color: var(--text);
+}
+
+.chat-app.light .top-bar {
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.chat-app.light .mode-cards button {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.chat-app.light .mode-cards span {
+  color: var(--muted);
+}
+
+.chat-app.light .messages-area {
+  background: transparent;
 }
 
 .sidebar {
