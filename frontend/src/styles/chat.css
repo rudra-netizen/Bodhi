@@ -335,6 +335,9 @@ input {
   flex-direction: column;
   background: var(--bg);
   min-height: 100vh;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
 .top-bar {
@@ -393,7 +396,7 @@ input {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  padding-bottom: 110px;
+  padding-bottom: 12px;
 }
 
 .welcome {
@@ -624,12 +627,14 @@ input {
 }
 
 .input-section {
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   bottom: 0;
   padding: 10px 10px 12px;
   background: linear-gradient(to top, var(--bg) 70%, transparent);
+  z-index: 5;
+  flex-shrink: 0;
 }
 
 .input-wrapper {
