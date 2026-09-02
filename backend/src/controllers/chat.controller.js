@@ -46,7 +46,7 @@ async function getChat(req, res) {
       });
     }
 
-    if (chat.user.toString() !== req.user.toString()) {
+    if (chat.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         message: "Unauthorized to access this chat",
       });
@@ -118,13 +118,15 @@ async function deleteChat(req, res) {
       });
     }
 
-    if (chat.user.toString() !== req.user.toString()) {
+    if (chat.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         message: "Unauthorized to delete this chat",
       });
     }
 
+    // delete chat and related messages for this user
     await chatModel.findByIdAndDelete(chatId);
+    await messageModel.deleteMany({ chat: chatId, user: req.user._id });
 
     return res.status(200).json({
       message: "Chat deleted successfully",
@@ -150,7 +152,7 @@ async function updateChat(req, res) {
       });
     }
 
-    if (chat.user.toString() !== req.user.toString()) {
+    if (chat.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         message: "Unauthorized to update this chat",
       });
